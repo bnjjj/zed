@@ -2199,17 +2199,13 @@ async fn test_create_duplicate_items(cx: &mut gpui::TestAppContext) {
     );
 }
 
-// NOTE: This test is skipped on Windows, because on Windows,
-// when it triggers the lsp store it converts `/src/test/first copy.txt` into an uri
-// but it fails with message `"/src\\test\\first copy.txt" is not parseable as an URI`
 #[gpui::test]
-#[cfg_attr(target_os = "windows", ignore)]
 async fn test_create_duplicate_items_and_check_history(cx: &mut gpui::TestAppContext) {
     init_test_with_editor(cx);
 
     let fs = FakeFs::new(cx.executor());
     fs.insert_tree(
-        "/src",
+        path!("/src"),
         json!({
             "test": {
                 "first.txt": "// First Txt file",
@@ -2466,17 +2462,13 @@ async fn test_create_duplicate_items_and_check_history(cx: &mut gpui::TestAppCon
         .unwrap();
 }
 
-// NOTE: This test is skipped on Windows, because on Windows,
-// when it triggers the lsp store it converts `/src/test/first.txt` into an uri
-// but it fails with message `"/src\\test\\first.txt" is not parseable as an URI`
 #[gpui::test]
-#[cfg_attr(target_os = "windows", ignore)]
 async fn test_rename_item_and_check_history(cx: &mut gpui::TestAppContext) {
     init_test_with_editor(cx);
 
     let fs = FakeFs::new(cx.executor());
     fs.insert_tree(
-        "/src",
+        path!("/src"),
         json!({
             "test": {
                 "first.txt": "// First Txt file",
